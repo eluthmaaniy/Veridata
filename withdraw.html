@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Funds</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .button-primary {
+            background-color: #4F46E5; /* Indigo-500 */
+            color: white;
+        }
+        .button-primary:hover {
+            background-color: #4338CA; /* Indigo-600 */
+        }
+        .input-field {
+            border-color: #D1D5DB; /* Gray-300 */
+        }
+        .input-field:focus {
+            border-color: #4F46E5; /* Indigo-500 */
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); /* Indigo-500 */
+        }
+        .card {
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body class="bg-auto">
+      <header class="bg-white shadow-lg p-2 mb-6 flex items-center justify-between border-b border-indigo-500 rounded-full mt-2 ml-2">
+        <a href="dashboard.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Withdraw Funds</h1>
+
+        <!-- Withdrawal Form -->
+        <div class="card p-6 mb-6 border-t border-b border-indigo-500">
+            <form id="withdraw-form">
+                <!-- Bank Selection -->
+                <div class="mb-4">
+                    <label for="bank" class="block text-sm font-semibold mb-2">Select Bank</label>
+                    <select id="bank" name="bank" class="input-field w-full p-2 rounded-md">
+                        <option value="">Select Bank</option>
+                        <option value="access-bank">Access Bank</option>
+                        <option value="fcmb">FCMB</option>
+                        <option value="gtbank">GTBank</option>
+                        <option value="zenith-bank">Zenith Bank</option>
+                        <!-- Add more banks as needed -->
+                    </select>
+                </div>
+
+                <!-- Account Number -->
+                <div class="mb-4">
+                    <label for="account-number" class="block text-sm font-semibold mb-2">Account Number</label>
+                    <input type="text" id="account-number" name="account-number" class="input-field w-full p-2 rounded-lg shadow-lg border border-gray-900" placeholder="Enter your account number" required>
+                </div>
+
+                <!-- Amount -->
+                <div class="mb-4">
+                    <label for="amount" class="block text-sm font-semibold mb-2">Amount</label>
+                    <input type="number" id="amount" name="amount" class="input-field w-full p-2 rounded-lg shadow-lg border border-gray-900" placeholder="Enter amount to withdraw" required>
+                </div>
+
+                <!-- Transaction Pin -->
+                <div class="mb-4">
+                    <label for="transaction-pin" class="block text-sm font-semibold mb-2">Transaction Pin</label>
+                    <input type="password" id="transaction-pin" name="transaction-pin" class="input-field w-full p-2 rounded-lg shadow-lg border border-gray-900" placeholder="Enter transaction pin" required>
+                    <a href="#" class="text-indigo-500 text-sm mt-1 block">Forgot Pin?</a>
+                </div>
+
+                <!-- Withdraw Button -->
+                <button type="submit" class="button-primary py-2 px-4 rounded-full w-full">Withdraw Now</button>
+            </form>
+        </div>
+
+        <!-- Withdrawal Summary -->
+        <div class="card p-6 border-b border-indigo-500 rounded-lg shadow-lg">
+            <h2 class="text-lg font-bold mb-4">Withdrawal Summary</h2>
+            <div class="flex justify-between mb-2">
+                <span class="text-gray-700">Bank:</span>
+                <span id="summary-bank" class="font-semibold">N/A</span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="text-gray-700">Account Number:</span>
+                <span id="summary-account" class="font-semibold">N/A</span>
+            </div>
+            <div class="flex justify-between mb-2">
+                <span class="text-gray-700">Amount:</span>
+                <span id="summary-amount" class="font-semibold">N/A</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="ri-checkbox-circle-fill text-green-500 text-4xl mb-4"></i>
+            <h2 class="text-xl font-semibold mb-4">Withdrawal Successful!</h2>
+            <p class="text-gray-700">Your withdrawal request has been processed successfully. Below are the details you provided:</p>
+            <div class="text-left mt-4">
+                <p><strong>Bank:</strong> <span id="modal-bank">N/A</span></p>
+                <p><strong>Account Number:</strong> <span id="modal-account">N/A</span></p>
+                <p><strong>Amount:</strong> <span id="modal-amount">N/A</span></p>
+            </div>
+            <button id="close-modal" class="button-primary py-2 px-4 rounded-full mt-4">Close</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById('withdraw-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get form values
+            const bank = document.getElementById('bank').value;
+            const accountNumber = document.getElementById('account-number').value;
+            const amount = document.getElementById('amount').value;
+
+            // Update summary
+            document.getElementById('summary-bank').textContent = bank || 'N/A';
+            document.getElementById('summary-account').textContent = accountNumber || 'N/A';
+            document.getElementById('summary-amount').textContent = amount || 'N/A';
+
+            // Update modal content
+            document.getElementById('modal-bank').textContent = bank || 'N/A';
+            document.getElementById('modal-account').textContent = accountNumber || 'N/A';
+            document.getElementById('modal-amount').textContent = amount || 'N/A';
+
+            // Show success modal
+            document.getElementById('success-modal').style.display = 'flex';
+        });
+
+        document.getElementById('close-modal').addEventListener('click', function () {
+            document.getElementById('success-modal').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

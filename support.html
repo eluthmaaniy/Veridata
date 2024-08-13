@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .chat-container {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            overflow: hidden;
+            z-index: 1000;
+            display: none; /* Initially hidden */
+        }
+        .chat-header {
+            background: #4a90e2;
+            color: #ffffff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .chat-messages {
+            padding: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-input {
+            border-top: 1px solid #ddd;
+            padding: 10px;
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .chat-input button {
+            background: #4a90e2;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+        }
+        .chat-message.user {
+            text-align: right;
+        }
+        .chat-message.user .message {
+            background: #4a90e2;
+            color: #ffffff;
+        }
+        .chat-message.bot .message {
+            background: #f1f1f1;
+        }
+        .chat-message .message {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .chat-feedback {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .chat-feedback button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body class="theme-light min-h-screen">
+    <!-- Header Section -->
+   <header class="bg-white shadow-md p-2 mb-6 flex items-center justify-between border-b border-indigo-500 rounded-full mt-2 ml-2">
+        <a href="dashboard.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <!-- Support Section -->
+    <main class="p-4">
+        <!-- Knowledge Base Section -->
+        <section class="bg-white shadow-lg rounded-lg p-6 mb-4 border-b border-indigo-500">
+            <h1 class="text-2xl font-bold mb-4">Support</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- FAQ Section -->
+                <div class="bg-white shadow-lg rounded-lg p-6 border-b border-t border-indigo-500">
+                    <h2 class="text-xl font-semibold mb-4">Knowledge Base</h2>
+                    <ul>
+                        <li class="mb-4 flex items-center">
+                            <i class="ri-question-line text-xl mr-2 text-indigo-500"></i>
+                            <button class="text-indigo-500 focus:outline-none" onclick="openChat('How to reset my password?')">
+                                How to reset my password?
+                            </button>
+                        </li>
+                        <li class="mb-4 flex items-center">
+                            <i class="ri-question-line text-xl mr-2 text-indigo-500"></i>
+                            <button class="text-indigo-500 focus:outline-none" onclick="openChat('How to update my email address?')">
+                             How to update my email address?
+                            </button>
+                        </li>
+                        <li class="mb-4 flex items-center">
+                            <i class="ri-question-line text-xl mr-2 text-indigo-500"></i>
+                            <button class="text-indigo-500 focus:outline-none" onclick="openChat('How to contact support?')">
+                                How to contact support?
+                            </button>
+                        </li>
+                        <!-- Add more questions as needed -->
+                       
+                       
+                    </ul>
+                </div>
+
+                <!-- Live Chat Section -->
+                <div class="bg-white shadow-md rounded-lg p-6">
+                    <h2 class="text-xl font-semibold mb-4">Live Chat</h2>
+                    <button id="chat-toggle" class="bg-indigo-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-600 transition duration-200 flex items-center">
+                        <i class="ri-chat-1-line text-xl mr-2"></i>
+                        Start Chat
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Live Chat UI -->
+    <div id="live-chat" class="chat-container">
+        <div class="chat-header" id="chat-header">
+            <span>Live Chat</span>
+            <i class="ri-close-line text-2xl"></i>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <!-- Messages will be inserted here dynamically -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Type your message...">
+            <button id="chat-send">Send</button>
+        </div>
+        <div id="chat-feedback" class="chat-feedback"></div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatContainer = document.getElementById('live-chat');
+        const chatHeader = document.getElementById('chat-header');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatFeedback = document.getElementById('chat-feedback');
+
+        chatToggle.addEventListener('click', function() {
+            chatContainer.style.display = 'block';
+        });
+
+        chatHeader.addEventListener('click', function() {
+            chatContainer.style.display = 'none';
+        });
+
+        function openChat(question) {
+            chatContainer.style.display = 'block';
+            const botMessage = document.createElement('div');
+            botMessage.className = 'chat-message bot';
+            botMessage.innerHTML = `<div class="message">You asked: ${question}</div>`;
+            chatMessages.appendChild(botMessage);
+
+            // Simulate a bot response
+            setTimeout(() => {
+                let responseMessage;
+                switch (question) {
+                    case 'How to reset my password?':
+                        responseMessage = 'To reset your password, go to the settings page and click "Reset Password". Follow the instructions provided.';
+                        break;
+                    case 'How to update my email address?':
+                        responseMessage = 'To update your email address, navigate to the profile settings page and edit your email.';
+                        break;
+                    case 'How to contact support?':
+                        responseMessage = 'If you need further assistance, please contact us through the <a href="contact.html" class="text-indigo-500">Contact Us</a> page.';
+                        break;
+                    default:
+                        responseMessage = 'I am not sure about that. Can I help you with something else?';
+                }
+                const response = document.createElement('div');
+                response.className = 'chat-message bot';
+                response.innerHTML = `<div class="message">${responseMessage}</div>`;
+                chatMessages.appendChild(response);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Feedback prompt
+                chatFeedback.innerHTML = `
+                    <div>Did this answer your question?</div>
+                    <button id="feedback-yes" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-200">Yes</button>
+                    <button id="feedback-no" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition duration-200">No</button>
+                `;
+                
+                document.getElementById('feedback-yes').addEventListener('click', () => {
+                    chatFeedback.innerHTML = '<div class="text-green-500">Thank you for your feedback!</div>';
+                });
+                document.getElementById('feedback-no').addEventListener('click', () => {
+                    chatFeedback.innerHTML = '<div class="text-red-500">Sorry to hear that. We\'ll work on improving!</div>';
+                });
+            }, 1000);
+        }
+
+        chatSend.addEventListener('click', function() {
+            const userMessage = chatInput.value;
+            if (userMessage.trim()) {
+                const userMsgElem = document.createElement('div');
+                userMsgElem.className = 'chat-message user';
+                userMsgElem.innerHTML = `<div class="message">${userMessage}</div>`;
+                chatMessages.appendChild(userMsgElem);
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Simulate bot response after a delay
+                setTimeout(() => {
+                    const botResponse = document.createElement('div');
+                    botResponse.className = 'chat-message bot';
+                    botResponse.innerHTML = `<div class="message">I'm still processing your message: ${userMessage}. Please wait a moment.</div>`;
+                    chatMessages.appendChild(botResponse);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>

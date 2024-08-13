@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - VTu</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .button-primary {
+            background-color: #4F46E5; /* Indigo-500 */
+            color: white;
+        }
+        .button-primary:hover {
+            background-color: #4338CA; /* Indigo-600 */
+        }
+       
+        
+        
+        }
+        .transaction-card {
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            border-top: 2px solid #4f46e5;
+            border-bottom: 2px solid #4f46e5;
+            margin-bottom: 1rem;
+        }
+        .card-icon {
+            font-size: 2rem;
+            color: #4F46E5; /* Indigo-500 */
+        }
+    </style>
+</head>
+
+<body class="bg-auto">
+      <header class="bg-white shadow-md p-2 mb-6 flex items-center justify-between border-b border-indigo-500 rounded-full mt-2 ml-2">
+        <a href="dashboard.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-lg border-b border-indigo-500">
+        <h1 class="text-2xl font-bold mb-6 text-center">View Your Transaction History</h1>
+
+        <!-- Filter Section -->
+        <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-center">Filter Transactions</h2>
+            <p class="text-center mb-2">Click on any item and to check the history.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button id="filter-airtime" class="bg-white rounded-full w-45 border-t border-b border-indigo-500 shadow-lg py-2 px-4 rounded-full w-45 md:w-auto flex items-center justify-center">
+                    <i class="ri-smartphone-line card-icon mr-2"></i> Airtime
+                </button>
+                <button id="filter-data" class="bg-white rounded-full w-45 border-t border-b border-indigo-500 shadow-lg py-2 px-4 rounded-full w-45 md:w-auto flex items-center justify-center">
+                    <i class="ri-router-line card-icon mr-2"></i> Data
+                </button>
+                <button id="filter-betting" class="bg-white rounded-full w-45 border-t border-b border-indigo-500 shadow-lg py-2 px-4 rounded-full w-45 md:w-auto flex items-center justify-center">
+                    <i class="ri-trophy-line card-icon mr-2"></i> Betting
+                </button>
+                <button id="filter-cable-tv" class="bg-white rounded-full w-45 border-t border-b border-indigo-500 shadow-lg py-2 px-4 md:w-auto flex items-center justify-center">
+                    <i class="ri-tv-line card-icon mr-2"></i> Cable TV
+                </button>
+                <button id="filter-exam-pin" class="bg-white rounded-full w-45 border-t border-b border-indigo-500 shadow-lg py-2 px-4 rounded-full w-45 md:w-auto flex items-center justify-center">
+                    <i class="ri-coupon-2-line card-icon mr-2"></i> Exam Pin
+                </button>
+                <button id="filter-electricity" class="bg-white rounded-full w-45 border-t border-b border-indigo-500 shadow-lg py-2 px-4 rounded-full w-45 md:w-auto flex items-center justify-center">
+                    <i class="ri-flashlight-line card-icon mr-2"></i> Electricity
+                </button>
+                <button id="filter-print-card" class="bg-white rounded-full w-45 border-t border-b border-indigo-500 shadow-lg py-2 px-4 rounded-full w-45 md:w-auto flex items-center justify-center">
+                    <i class="ri-printer-line card-icon mr-2"></i> Print Card
+                </button>
+            </div>
+        </section>
+
+        <!-- Transactions Section -->
+        <section id="transactions-section">
+            <!-- Airtime Transactions -->
+            <div id="airtime-history" class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Airtime Purchase History</h2>
+                <div class="transaction-card">
+                    <i class="ri-phone-line card-icon"></i>
+                    <h3 class="text-lg font-semibold">Transaction #001</h3>
+                    <p class="text-gray-700">Amount: ₦2000</p>
+                    <p class="text-gray-500">Date: 2024-08-01</p>
+                </div>
+                <!-- More Airtime transactions -->
+            </div>
+
+            <!-- Data Transactions -->
+            <div id="data-history" class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Data Purchase History</h2>
+                <div class="transaction-card">
+                    <i class="ri-router-line card-icon"></i>
+                    <h3 class="text-lg font-semibold">Transaction #002</h3>
+                    <p class="text-gray-700">Amount: ₦1500</p>
+                    <p class="text-gray-500">Date: 2024-08-02</p>
+                </div>
+                <!-- More Data transactions -->
+            </div>
+
+            <!-- Betting Transactions -->
+            <div id="betting-history" class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Betting History</h2>
+                <div class="transaction-card">
+                    <i class="ri-trophy-line card-icon"></i>
+                    <h3 class="text-lg font-semibold">Transaction #003</h3>
+                    <p class="text-gray-700">Amount: ₦5000</p>
+                    <p class="text-gray-500">Date: 2024-08-03</p>
+                </div>
+                <!-- More Betting transactions -->
+            </div>
+
+            <!-- Cable TV Transactions -->
+            <div id="cable-tv-history" class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Cable TV History</h2>
+                <div class="transaction-card">
+                    <i class="ri-tv-line card-icon"></i>
+                    <h3 class="text-lg font-semibold">Transaction #004</h3>
+                    <p class="text-gray-700">Amount: ₦3000</p>
+                    <p class="text-gray-500">Date: 2024-08-04</p>
+                </div>
+                <!-- More Cable TV transactions -->
+            </div>
+
+            <!-- Exam Pin Transactions -->
+            <div id="exam-pin-history" class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Exam Pin History</h2>
+                <div class="transaction-card">
+                    <i class="ri-edit-line card-icon"></i>
+                    <h3 class="text-lg font-semibold">Transaction #005</h3>
+                    <p class="text-gray-700">Amount: ₦1000</p>
+                    <p class="text-gray-500">Date: 2024-08-05</p>
+                </div>
+                <!-- More Exam Pin transactions -->
+            </div>
+
+            <!-- Electricity Transactions -->
+            <div id="electricity-history" class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Electricity Payment History</h2>
+                <div class="transaction-card">
+                    <i class="ri-flashlight-line card-icon"></i>
+                    <h3 class="text-lg font-semibold">Transaction #006</h3>
+                    <p class="text-gray-700">Amount: ₦2500</p>
+                    <p class="text-gray-500">Date: 2024-08-06</p>
+                </div>
+                <!-- More Electricity transactions -->
+            </div>
+
+            <!-- Print Card Transactions -->
+            <div id="print-card-history" class="hidden">
+                <h2 class="text-xl font-semibold mb-4">Print Card History</h2>
+                <div class="transaction-card">
+                    <i class="ri-printer-line card-icon"></i>
+                    <h3 class="text-lg font-semibold">Transaction #007</h3>
+                    <p class="text-gray-700">Amount: ₦1200</p>
+                    <p class="text-gray-500">Date: 2024-08-07</p>
+                </div>
+                <!-- More Print Card transactions -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('filter-airtime').addEventListener('click', function() {
+            document.getElementById('airtime-history').classList.remove('hidden');
+            document.getElementById('data-history').classList.add('hidden');
+            document.getElementById('betting-history').classList.add('hidden');
+            document.getElementById('cable-tv-history').classList.add('hidden');
+            document.getElementById('exam-pin-history').classList.add('hidden');
+            document.getElementById('electricity-history').classList.add('hidden');
+            document.getElementById('print-card-history').classList.add('hidden');
+        });
+
+        document.getElementById('filter-data').addEventListener('click', function() {
+            document.getElementById('airtime-history').classList.add('hidden');
+            document.getElementById('data-history').classList.remove('hidden');
+            document.getElementById('betting-history').classList.add('hidden');
+            document.getElementById('cable-tv-history').classList.add('hidden');
+            document.getElementById('exam-pin-history').classList.add('hidden');
+            document.getElementById('electricity-history').classList.add('hidden');
+            document.getElementById('print-card-history').classList.add('hidden');
+        });
+
+        document.getElementById('filter-betting').addEventListener('click', function() {
+            document.getElementById('airtime-history').classList.add('hidden');
+            document.getElementById('data-history').classList.add('hidden');
+            document.getElementById('betting-history').classList.remove('hidden');
+            document.getElementById('cable-tv-history').classList.add('hidden');
+            document.getElementById('exam-pin-history').classList.add('hidden');
+            document.getElementById('electricity-history').classList.add('hidden');
+            document.getElementById('print-card-history').classList.add('hidden');
+        });
+
+        document.getElementById('filter-cable-tv').addEventListener('click', function() {
+            document.getElementById('airtime-history').classList.add('hidden');
+            document.getElementById('data-history').classList.add('hidden');
+            document.getElementById('betting-history').classList.add('hidden');
+            document.getElementById('cable-tv-history').classList.remove('hidden');
+            document.getElementById('exam-pin-history').classList.add('hidden');
+            document.getElementById('electricity-history').classList.add('hidden');
+            document.getElementById('print-card-history').classList.add('hidden');
+        });
+
+        document.getElementById('filter-exam-pin').addEventListener('click', function() {
+            document.getElementById('airtime-history').classList.add('hidden');
+            document.getElementById('data-history').classList.add('hidden');
+            document.getElementById('betting-history').classList.add('hidden');
+            document.getElementById('cable-tv-history').classList.add('hidden');
+            document.getElementById('exam-pin-history').classList.remove('hidden');
+            document.getElementById('electricity-history').classList.add('hidden');
+            document.getElementById('print-card-history').classList.add('hidden');
+        });
+
+        document.getElementById('filter-electricity').addEventListener('click', function() {
+            document.getElementById('airtime-history').classList.add('hidden');
+            document.getElementById('data-history').classList.add('hidden');
+            document.getElementById('betting-history').classList.add('hidden');
+            document.getElementById('cable-tv-history').classList.add('hidden');
+            document.getElementById('exam-pin-history').classList.add('hidden');
+            document.getElementById('electricity-history').classList.remove('hidden');
+            document.getElementById('print-card-history').classList.add('hidden');
+        });
+
+        document.getElementById('filter-print-card').addEventListener('click', function() {
+            document.getElementById('airtime-history').classList.add('hidden');
+            document.getElementById('data-history').classList.add('hidden');
+            document.getElementById('betting-history').classList.add('hidden');
+            document.getElementById('cable-tv-history').classList.add('hidden');
+            document.getElementById('exam-pin-history').classList.add('hidden');
+            document.getElementById('electricity-history').classList.add('hidden');
+            document.getElementById('print-card-history').classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html>

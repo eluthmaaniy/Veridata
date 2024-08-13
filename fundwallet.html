@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Funding</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css' rel='stylesheet'/>
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+       
+    </style>
+</head>
+<body class="min-h-screen bg-zinc-100 p-4">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md p-2 flex items-center justify-between border-b border-indigo-500 rounded-full">
+        <a href="dashboard.html" class="text-zinc-700 flex items-center">
+            <i class="fas fa-arrow-left text-2xl"></i>
+            <span class="ml-2 text-xl font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <!-- Funding Page Content -->
+    <main class="mt-6">
+        <!-- Bank Transfer Section -->
+        <section id="bankTransferSection" class="bg-white rounded-lg p-4 mb-4 shadow">
+            <div class="flex items-center mb-4">
+                <div class="bg-zinc-200 p-2 rounded-full">
+                    <i class="ri-bank-fill text-indigo-500 text-2xl"></i>
+                </div>
+                <div class="ml-4">
+                    <h2 class="text-lg font-semibold">Bank Transfer</h2>
+                    <p class="text-zinc-500">Add money via mobile or internet banking.</p>
+                </div>
+                <button id="bankTransferArrow" class="ml-auto text-zinc-500">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <hr class="my-4">
+            <div>
+                <p class="text-zinc-500">Account Number for Transfer:</p>
+                <p id="accountNumber" class="text-2xl font-bold">123 456 7890</p>
+            </div>
+            <div class="flex mt-4">
+                <button id="copyNumberButton" class="flex-1 bg-indigo-100 text-indigo-500 py-2 rounded-lg mr-2">Copy Number</button>
+                <button id="shareDetailsButton" class="flex-1 bg-indigo-500 text-white py-2 rounded-lg">Share Details</button>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="flex items-center justify-center mb-4">
+            <hr class="flex-1">
+            <span class="mx-4 text-zinc-500">OR</span>
+            <hr class="flex-1">
+        </div>
+
+       
+
+        <!-- Top-Up with Card/Account Section -->
+        <section id="topUpSection" class="bg-white rounded-lg p-2 mb-4 shadow flex items-center">
+            <div class="bg-zinc-200 p-2 rounded-full">
+                <i class="ri-bank-card-line text-indigo-500 text-2xl"></i>
+            </div>
+            <div class="ml-4">
+                <h2 class="text-lg font-semibold">Top-Up with Card/Account</h2>
+                <p class="text-zinc-500">Add funds directly from your bank card or account.</p>
+            </div>
+            <button id="topUpArrow" class="ml-auto text-zinc-500">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </section>
+
+        <!-- Bank USSD Section -->
+        <section id="bankUssdSection" class="bg-white rounded-lg p-2 mb-4 shadow flex items-center">
+            <div class="bg-zinc-200 p-2 rounded-full">
+                <i class="ri-smartphone-line text-indigo-500 text-2xl"></i>
+            </div>
+            <div class="ml-4">
+                <h2 class="text-lg font-semibold">Bank USSD</h2>
+                <p class="text-zinc-500">Use USSD codes from various banks.</p>
+            </div>
+            <button id="bankUssdArrow" class="ml-auto text-zinc-500">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </section>
+
+      
+    </main>
+
+    
+
+    <script>
+        document.getElementById('copyNumberButton').addEventListener('click', function() {
+            const accountNumber = document.getElementById('accountNumber').innerText;
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                alert('Account number copied to clipboard.');
+            });
+        });
+
+        document.getElementById('shareDetailsButton').addEventListener('click', function() {
+            const accountNumber = document.getElementById('accountNumber').innerText;
+            // You might want to use a sharing service or create a shareable link
+            alert('Share this account number: ' + accountNumber);
+        });
+
+       
+    </script>
+</body>
+</html>

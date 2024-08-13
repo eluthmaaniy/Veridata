@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cable TV Funding</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .provider-option {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .provider-option:hover {
+            transform: scale(1.05);
+        }
+        .provider-option.selected {
+            border: 2px solid #4F46E5; /* Indigo-600 */
+            border-radius: 8px;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-content {
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body class="bg-auto">
+    
+    
+  <header class="bg-white shadow-lg p-2 mb-6 flex items-center justify-between border-b border-indigo-500 rounded-full">
+        <a href="dashboard.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+    
+
+<div>
+  <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723396206/cabletv_cpbb7x.png" alt="Banner-1" class="shadow-lg rounded-lg w-64 ml-12"></img>
+</div>
+    <main>
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 mt-5">
+            <h1 class="text-xl font-semibold mb-4">Cable TV Funding</h1>
+
+            <div class="mb-4">
+                <label for="provider" class="block text-gray-700 font-semibold mb-2">Select Provider</label>
+                <div class="relative">
+                    <div id="provider-selector" class="flex items-center border border-gray-300 rounded-lg p-2 mb-2 cursor-pointer">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1716487483/download_3_l1yile.png" alt="Startimes" class="w-8 h-8 rounded-full mr-2">
+                        <p id="selected-provider" class="text-gray-800 font-semibold">Select Provider</p>
+                        <i class="ri-arrow-down-s-line ml-auto text-gray-600"></i>
+                    </div>
+                    <div id="provider-list" class="absolute w-full bg-white border border-gray-300 rounded-lg mt-1 hidden">
+                        <div class="provider-option p-2 flex items-center cursor-pointer hover:bg-gray-100" data-id="startimes">
+                            <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723396966/images_1_gz0mcx.png" alt="Startimes" class="w-8 h-8 rounded-full mr-2">
+                            <p class="text-gray-800">Startimes</p>
+                        </div>
+                        <div class="provider-option p-2 flex items-center cursor-pointer hover:bg-gray-100" data-id="dstv">
+                            <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1716487214/download_4_dezecw.jpg" alt="DSTV" class="w-8 h-8 rounded-full mr-2">
+                            <p class="text-gray-800">DSTV</p>
+                        </div>
+                        <div class="provider-option p-2 flex items-center cursor-pointer hover:bg-gray-100" data-id="gotv">
+                            <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1716487215/images_2_lxuqtu.jpg" alt="GOTV" class="w-8 h-8 rounded-full mr-2">
+                            <p class="text-gray-800">GOTV</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="smartcard" class="block text-gray-700 font-semibold mb-2">Smartcard Number</label>
+                <input type="number" id="smartcard" class="w-full border border-gray-300 rounded-lg shadow-lg p-2" placeholder="Enter Smartcard Number">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2">Payment Period</label>
+                <div class="flex">
+                    <button id="payment-period-7" class="w-1/2 border border-gray-300 rounded-l-lg p-2 text-center bg-blue-100 text-blue-500">7 Days</button>
+                    <button id="payment-period-30" class="w-1/2 border border-gray-300 rounded-r-lg p-2 text-center">30 Days</button>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="package" class="block text-gray-700 font-semibold mb-2">Package</label>
+                <select id="package" class="w-full border border-gray-300 rounded-lg p-2">
+                    <!-- Options for DSTV, GOTV, and Startimes will be dynamically populated here -->
+                    <option value="">Please select your package</option>
+                </select>
+            </div>
+
+            <button id="confirm-btn" class="w-full bg-indigo-500 text-white font-semibold py-2 rounded-lg">Confirm</button>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="success-modal" id="success-modal">
+            <div class="modal-content">
+                <i class="ri-check-double-line text-5xl text-green-500 mb-4"></i>
+                <h2 class="text-lg font-semibold mb-2">Success!</h2>
+                <p>Your payment was successful.</p>
+                <p><strong>Provider:</strong> <span id="success-provider"></span></p>
+                <p><strong>Smartcard Number:</strong> <span id="success-smartcard"></span></p>
+                <p><strong>Package:</strong> <span id="success-package"></span></p>
+                <p><strong>Payment Period:</strong> <span id="success-period"></span></p>
+                <button id="pay-now-btn" class="mt-4 bg-green-500 text-white font-semibold py-2 rounded-lg">Pay Now</button>
+                <button id="close-modal" class="mt-4 bg-gray-500 text-white font-semibold py-2 rounded-lg">Close</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const providerSelector = document.getElementById('provider-selector');
+            const providerList = document.getElementById('provider-list');
+            const providerOptions = document.querySelectorAll('.provider-option');
+            const selectedProvider = document.getElementById('selected-provider');
+            const confirmBtn = document.getElementById('confirm-btn');
+            const payNowBtn = document.getElementById('pay-now-btn');
+            const successModal = document.getElementById('success-modal');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const closeModalBtn = document.getElementById('close-modal');
+            let selectedProviderId = '';
+
+            providerSelector.addEventListener('click', function () {
+                providerList.classList.toggle('hidden');
+            });
+
+            providerOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    selectedProviderId = option.getAttribute('data-id');
+                    selectedProvider.textContent = option.querySelector('p').textContent;
+                    providerList.classList.add('hidden');
+                    updatePackageOptions(selectedProviderId);
+                });
+            });
+
+            function updatePackageOptions(providerId) {
+                const packageSelect = document.getElementById('package');
+                packageSelect.innerHTML = '<option value="">Please select your package</option>';
+                let packages = [];
+
+                if (providerId === 'dstv') {
+                    packages = Array.from({ length: 30 }, (_, i) => `DSTV Package ${i + 1}`);
+                } else if (providerId === 'gotv') {
+                    packages = Array.from({ length: 8 }, (_, i) => `GOTV Package ${i + 1}`);
+                } else if (providerId === 'startimes') {
+                    packages = Array.from({ length: 16 }, (_, i) => `Startimes Package ${i + 1}`);
+                }
+
+                packages.forEach(pkg => {
+                    const option = document.createElement('option');
+                    option.value = pkg;
+                    option.textContent = pkg;
+                    packageSelect.appendChild(option);
+                });
+            }
+
+            confirmBtn.addEventListener('click', function () {
+                const smartcard = document.getElementById('smartcard').value;
+                const package = document.getElementById('package').value;
+                const paymentPeriod = document.querySelector('#payment-period-7.bg-indigo-100') ? '7 Days' : '30 Days';
+
+                document.getElementById('success-provider').textContent = selectedProvider.textContent;
+                document.getElementById('success-smartcard').textContent = smartcard;
+                document.getElementById('success-package').textContent = package;
+                document.getElementById('success-period').textContent = paymentPeriod;
+
+                successModal.style.display = 'block';
+                modalOverlay.style.display = 'block';
+            });
+
+            payNowBtn.addEventListener('click', function () {
+                // Handle the pay now logic here
+                console.log('Payment initiated');
+            });
+
+            closeModalBtn.addEventListener('click', function () {
+                modalOverlay.style.display = 'none';
+                successModal.style.display = 'none';
+            });
+
+            modalOverlay.addEventListener('click', function () {
+                closeModalBtn.click();
+            });
+        });
+    </script>
+</body>
+
+</html>

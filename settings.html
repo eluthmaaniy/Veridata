@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .theme-dark {
+            background-color: #2d3748;
+            color: #ffffff;
+        }
+        .theme-light {
+            background-color: #f7fafc;
+            color: #2d3748;
+        }
+    </style>
+</head>
+
+<body class="theme-light min-h-screen">
+    <!-- Header Section -->
+    <header class="bg-white shadow-md p-2 flex items-center justify-between border-b border-gray-200">
+        <a href="profile-settings.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back to Profile Settings</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1720892342/images_1_mfbwjz.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <!-- Account Settings Section -->
+    <main class="p-4">
+        <section class="bg-white shadow-md rounded-lg p-4 mb-4">
+            <h1 class="text-2xl font-bold mb-4">Account Settings</h1>
+            <form action="#" method="POST" class="space-y-6">
+                <!-- Username Field -->
+                <div class="flex items-center border-b border-gray-300 py-2">
+                    <i class="ri-user-line text-gray-500 mr-4"></i>
+                    <input type="text" id="username" name="username" placeholder="Username" value="john_doe" class="flex-1 border-none outline-none bg-transparent">
+                </div>
+                <!-- Email Field -->
+                <div class="flex items-center border-b border-gray-300 py-2">
+                    <i class="ri-mail-line text-gray-500 mr-4"></i>
+                    <input type="email" id="account-email" name="account-email" placeholder="Email" value="john.doe@example.com" class="flex-1 border-none outline-none bg-transparent">
+                </div>
+                <!-- Password Field -->
+                <div class="flex items-center border-b border-gray-300 py-2">
+                    <i class="ri-lock-line text-gray-500 mr-4"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" class="flex-1 border-none outline-none bg-transparent">
+                </div>
+                <!-- Confirm Password Field -->
+                <div class="flex items-center border-b border-gray-300 py-2">
+                    <i class="ri-lock-2-line text-gray-500 mr-4"></i>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" class="flex-1 border-none outline-none bg-transparent">
+                </div>
+                <!-- Save Changes Button -->
+                <div class="flex justify-center">
+                    <button type="submit" class="bg-indigo-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-indigo-600 transition duration-200">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+
+           </section>
+           
+            <!-- Settings Section -->
+            <section class="bg-white text-gray-900 shadow-md rounded-lg p-4 mt-6">
+                <h2 class="text-xl font-semibold mb-4">Preferences</h2>
+                <form id="preferences-form" class="space-y-4">
+                    <!-- Theme Switch -->
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-sun-line text-gray-500 text-xl"></i>
+                        <label for="theme-toggle" class="flex items-center space-x-2">
+                            <span>Light Mode</span>
+                            <input type="checkbox" id="theme-toggle" class="toggle-checkbox hidden" />
+                            <span class="toggle-label cursor-pointer">Dark Mode</span>
+                        </label>
+                        <i class="ri-moon-line text-gray-500 text-xl"></i>
+                    </div>
+
+                   
+                    <!-- Newsletter Subscription -->
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-mail-send-line text-gray-500 text-xl"></i>
+                        <label for="newsletter" class="flex items-center space-x-2">
+                            <span>Subscribe to Newsletter</span>
+                            <input type="checkbox" id="newsletter" class="ml-2">
+                        </label>
+                    </div>
+
+                    <!-- Account Deletion -->
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-delete-bin-line text-red-500 text-xl"></i>
+                        <button type="button" id="delete-account" class="text-red-500 font-bold">Delete Account</button>
+                    </div>
+                </form>
+            </section>
+    </main>
+
+  <!-- Footer Section -->
+    <footer class="bg-white shadow-md fixed bottom-0 left-0 right-0 p-2 flex justify-around border-t border-gray-200">
+        <a href="index.html" class="flex flex-col items-center text-indigo-500">
+            <i class="ri-home-5-line text-3xl"></i>
+            <span class="text-xs font-bold text-gray-900">Home</span>
+        </a>
+        <a href="transactions.html" class="flex flex-col items-center text-indigo-500">
+            <i class="ri-file-list-3-line text-3xl"></i>
+            <span class="text-xs font-bold text-gray-900">Transactions</span>
+        </a>
+        <a href="services.html" class="flex flex-col items-center text-indigo-500">
+            <i class="ri-magic-line text-3xl"></i>
+            <span class="text-xs font-bold text-gray-900">Services</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center text-indigo-500">
+            <i class="ri-user-line text-3xl"></i>
+            <span class="text-xs font-bold text-gray-900">Profile</span>
+        </a>
+    </footer>
+      
+
+    <!-- Modal for Account Deletion -->
+    <div id="delete-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-auto">
+            <h2 class="text-lg font-semibold mb-4">Confirm Account Deletion</h2>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <div class="flex justify-end space-x-4 mt-4">
+                <button id="cancel-delete" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">Cancel</button>
+                <button id="confirm-delete" class="bg-red-500 text-white px-4 py-2 rounded-lg">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        document.getElementById('theme-toggle').addEventListener('change', function () {
+            document.body.classList.toggle('theme-dark');
+            document.body.classList.toggle('theme-light');
+            document.querySelector('.toggle-label').textContent = this.checked ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+        });
+
+        document.getElementById('delete-account').addEventListener('click', function () {
+            document.getElementById('delete-modal').classList.remove('hidden');
+        });
+
+        document.getElementById('cancel-delete').addEventListener('click', function () {
+            document.getElementById('delete-modal').classList.add('hidden');
+        });
+
+        document.getElementById('confirm-delete').addEventListener('click', function () {
+            // Handle account deletion logic here
+            alert('Account deleted!');
+            document.getElementById('delete-modal').classList.add('hidden');
+        });
+    </script>
+</body>
+
+</html>

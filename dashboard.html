@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTU Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+ 
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+
+        /* Theme switcher */
+        .theme-dark {
+            background-color: #2d3748;
+            color: #ffffff;
+        }
+
+        .theme-light {
+            background-color: #ffffff;
+            color: #2d3748;
+        }
+
+        /* Hide menu by default */
+#menuOverlay {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-open #menuOverlay {
+    display: block;
+    opacity: 1;
+}
+
+.menu-open #menuItems {
+    transform: translateX(0);
+    display: block;
+}
+
+
+    </style>
+    
+
+
+   
+</head>
+
+<body class="theme-light min-h-screen p-3">
+    <!-- Header Section -->
+    <div id="header" class="w-auto bg-auto flex items-center justify-between mb-4 p-2 rounded-full shadow-lg border-b border-indigo-500">
+        <div class="flex items-center" id="profile_section">
+            <a href="profile.html">
+                <img id="profile_pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile" class="rounded-full w-10 h-10">
+            </a>
+            <div class="ml-2">
+                <p id="user_name" class="text-font-weight-normal">Hi, Osman!</p>
+            </div>
+        </div>
+        <div class="flex space-x-4">
+            <i id="theme-toggle" class="ri-sun-line text-2xl text-indigo-500 cursor-pointer"></i>
+            <i id="menu-icon" class="ri-apps-fill text-2xl text-indigo-500 cursor-pointer"></i>
+        </div>
+    </div>
+
+    <!-- Hidden Menu Items with Overlay -->
+<div id="menuOverlay" class="hidden fixed inset-0 bg-white bg-opacity-50 z-40"></div>
+
+<div id="menuItems" class="hidden fixed top-0 left-0 z-50 w-50 h-50 bg-white border-0 border-indigo-500 text-gray-900 transform -translate-x-full transition-transform duration-300 rounded-lg mt-2">
+    <div class="p-4">
+        <a href="support.html" class="block mb-2"><i class="ri-customer-service-2-line text-indigo-500"></i> Support</a>
+        <a href="profile.html" class="block mb-2"><i class="ri-user-line text-indigo-500"></i> Profile</a>
+        <a href="settings.html" class="block mb-2"><i class="ri-settings-line text-indigo-500"></i> Settings</a>
+        <a href="logout.html" class="block"><i class="ri-logout-box-line text-indigo-500"></i> Logout</a>
+    </div>
+</div>
+
+ 
+    
+    <!-- Balance Section -->
+    <div id="balance-section" class="bg-indigo-500 p-2 rounded-lg shadow-lg mb-4 text-white relative" data-aos="fade-up">
+        <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center">
+                <i class="ri-wallet-3-fill mr-2"></i>
+                <a href="#"><span>Wallet</span></a>
+                <i id="toggle-eye" class="ri-eye-line ml-2 cursor-pointer"></i>
+            </div>
+        </div>
+        <div id="balance-amount" class="text-2xl font-bold mb-2">₦5,104.20</div>
+        <div class="flex justify-between items-center">
+            <a href="transactions.html"><span id="transaction-history" class="absolute top-2 right-2 cursor-pointer">History</span></a>
+            <a href="fundwallet.html"><button id="add_money" class="bg-white text-indigo-500 px-2 py-2 rounded-lg absolute bottom-2 right-2">+ Fund Wallet</button></a>
+        </div>
+    </div>
+
+    <!-- Actions Section -->
+    <div id="actions_section" class="bg-white p-2 rounded-full shadow-lg mb-4 border border-gray-300" data-aos="fade-up">
+        <div class="grid grid-cols-3 gap-4">
+            <a href="upgrade.html">
+                <div id="to-opay" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-medal-fill text-indigo-500 text-3xl"></i>
+                    </div>
+                    <span class="text-gray-900">Upgrade</span>
+                </div>
+            </a>
+            <a href="airtime2cash.html">
+                <div id="bank" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-cash-fill text-indigo-500 text-3xl"></i>
+                    </div>
+                    <span class="text-gray-900">Airtime2Cash</span>
+                </div>
+            </a>
+            <a href="withdraw.html">
+                <div id="withdraw" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-exchange-fill text-indigo-500 text-3xl"></i>
+                    </div>
+                    <span class="text-gray-900">Withdraw</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div id="services_section" class="bg-white text-gray-90 p-2 rounded-lg mb-4 shadow-lg border-b border-indigo-500" data-aos="fade-up">
+        <div class="grid grid-cols-4 gap-4">
+            <a href="airtime.html">
+                <div id="airtime" class="flex flex-col items-center">
+                    <div class="relative">
+                        <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                            <i class="ri-smartphone-line text-indigo-500 text-2xl"></i>
+                        </div>
+                        <span class="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-full">6%</span>
+                    </div>
+                    <span class="text-gray-900">Airtime</span>
+                </div>
+            </a>
+            <a href="data.html">
+                <div id="data" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-router-fill text-indigo-500 text-2xl"></i>
+                    </div>
+                    <span class="text-gray-900">Data</span>
+                </div>
+            </a>
+            <a href="betting.html">
+                <div id="betting" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-trophy-line text-indigo-500 text-2xl"></i>
+                    </div>
+                    <span class="text-gray-900">Betting</span>
+                </div>
+            </a>
+            <a href="cable-tv.html">
+                <div id="tv" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-radar-line text-indigo-500 text-2xl"></i>
+                    </div>
+                    <span class="text-gray-900">CableTV</span>
+                </div>
+            </a>
+            <a href="exam-pin.html">
+                <div id="owealth" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-coupon-2-line text-indigo-500 text-2xl"></i>
+                    </div>
+                    <span class="text-gray-900">ExamPin</span>
+                </div>
+            </a>
+            <a href="refer2earn.html">
+                <div id="loan" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-group-2-line text-indigo-500 text-2xl"></i>
+                    </div>
+                    <span class="text-gray-900">Refer2Earn</span>
+                </div>
+            </a>
+            <a href="electricity.html">
+                <div id="play4achild" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-flashlight-line text-indigo-500 text-2xl"></i>
+                    </div>
+                    <span class="text-gray-900">Electricity</span>
+                </div>
+            </a>
+            <a href="print-card.html">
+                <div id="more" class="flex flex-col items-center">
+                    <div class="bg-indigo-50 p-2 rounded-full mb-2">
+                        <i class="ri-printer-line text-indigo-500 text-2xl"></i>
+                    </div>
+                    <span class="text-gray-900">PrintCard</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+<div>
+  <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723448012/refers_tnklon.png" alt="Banner-1" class="shadow-lg rounded-lg"></img>
+</div>
+    
+  <!-- Stats Popup -->
+    <div id="stats-popup" class="fixed bottom-12 left-4 bg-white rounded-lg shadow-lg p-4 max-w-sm w-45 hidden z-50 border-b border-t border-indigo-500">
+        <button id="close-stats-popup" class="absolute top-1 right-1 text-indigo-500 hover:text-gray-800">
+            <i class="ri-close-fill ri-2x"></i>
+        </button>
+        <h6 class="text-lg font-semibold mb-2">Your Stats</h6>
+        <div class="flex items-center mb-2">
+            <i class="ri-wallet-line text-2xl text-indigo-500 mr-2"></i>
+            <div>
+                <h6 class="text-sm font-medium">Total Funds</h6>
+                <p class="text-base text-gray-700">₦<span id="total-funds">5,104.20</span></p>
+            </div>
+        </div>
+        <div class="flex items-center mb-2">
+            <i class="ri-cash-line text-2xl text-indigo-500 mr-2"></i>
+            <div>
+                <h6 class="text-sm font-medium">Total Spent</h6>
+                <p class="text-base text-gray-700">₦<span id="total-spent">0</span></p>
+            </div>
+        </div>
+        <div class="flex items-center mb-2">
+            <i class="ri-user-line text-2xl text-indigo-500 mr-2"></i>
+            <div>
+                <h6 class="text-sm font-medium">Referrals</h6>
+                <p class="text-base text-gray-700"><span id="total-referrals">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-white shadow-md fixed bottom-0 left-0 right-0 p-2 flex justify-around border-t border-gray-200">
+        <a href="dashboard.html" class="flex flex-col items-center text-indigo-500">
+            <i class="ri-bar-chart-2-line text-3xl"></i>
+            <span class="text-xs font-bold text-gray-900">Stats</span>
+        </a>
+        <a href="transactions.html" class="flex flex-col items-center text-indigo-500">
+            <i class="ri-file-list-3-line text-3xl"></i>
+            <span class="text-xs font-bold text-gray-900">Transactions</span>
+        </a>
+        <a href="services.html" class="flex flex-col items-center text-indigo-500">
+            <i class="ri-magic-line text-3xl"></i>
+            <span class="text-xs font-bold text-gray-900">Services</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center text-indigo-500">
+            <i class="ri-user-smile-line text-3xl"></i>
+            <span class="text-xs font-bold text-gray-900">Profile</span>
+        </a>
+    </footer>
+    
+    <script>
+        // Toggle theme function
+        function toggleTheme() {
+            document.body.classList.toggle('theme-dark');
+            document.body.classList.toggle('theme-light');
+        }
+
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+        // Toggle menu items visibility with overlay
+document.getElementById('menu-icon').addEventListener('click', () => {
+    document.body.classList.toggle('menu-open');
+});
+
+document.getElementById('menuOverlay').addEventListener('click', () => {
+    document.body.classList.remove('menu-open');
+});
+
+
+        // Toggle balance visibility
+document.getElementById('toggle-eye').addEventListener('click', () => {
+    const balance = document.getElementById('balance-amount');
+    const currentBalance = balance.textContent;
+    
+    // Check if the balance is currently hidden
+    if (balance.dataset.hidden === "true") {
+        balance.textContent = balance.dataset.originalBalance; // Show the original balance
+        balance.dataset.hidden = "false";
+    } else {
+        balance.dataset.originalBalance = currentBalance; // Store the original balance
+        balance.textContent = '****'; // Hide the balance
+        balance.dataset.hidden = "true";
+    }
+});
+
+    </script>
+    
+ <script>
+        // Select elements
+        const statsPopup = document.getElementById('stats-popup');
+        const closeStatsPopup = document.getElementById('close-stats-popup');
+        const statsButton = document.querySelector('[href="dashboard.html"]');
+
+        // Show the stats popup
+        statsButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link action
+            statsPopup.classList.remove('hidden');
+        });
+
+        // Close the stats popup
+        closeStatsPopup.addEventListener('click', function() {
+            statsPopup.classList.add('hidden');
+        });
+    </script>
+</body>
+
+</html>

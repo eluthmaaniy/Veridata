@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - VTu</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .button-primary {
+            background-color: #4F46E5; /* Indigo-500 */
+            color: white;
+        }
+        .button-primary:hover {
+            background-color: #4338CA; /* Indigo-600 */
+        }
+        .service-card {
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .service-card:hover {
+            transform: scale(1.03);
+        }
+        .card-icon {
+            font-size: 3rem;
+            color: #4F46E5; /* Indigo-500 */
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body class="bg-auto">
+      <header class="bg-white shadow-lg p-2 mb-6 flex items-center justify-between border-b border-indigo-500 rounded-full mt-2 ml-2">
+        <a href="dashboard.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Explore Our Services</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Airtime Top Up -->
+            <div class="service-card p-3 border-t border-indigo-500">
+                <i class="ri-smartphone-line card-icon"></i>
+                <h2 class="text-xl font-bold mb-4 text-center">Airtime Top Up</h2>
+                <p class="text-center text-gray-700 mb-4">Quickly top up your mobile airtime balance with ease. Choose from a range of amounts and complete your top-up securely.</p>
+                <a href="airtime.html" class="button-primary py-2 px-4 rounded-full block text-center">Top Up Now</a>
+            </div>
+
+            <!-- Data Bundle -->
+            <div class="service-card p-3 border-t border-indigo-500">
+                <i class="ri-wifi-line card-icon"></i>
+                <h2 class="text-xl font-bold mb-4 text-center">Data Bundle</h2>
+                <p class="text-center text-gray-700 mb-4">Purchase and manage data bundles for various networks. Enjoy seamless internet access with our reliable data packages.</p>
+                <a href="data.html" class="button-primary py-2 px-4 rounded-full block text-center">Buy Data Bundle</a>
+            </div>
+
+            <!-- Print Cards -->
+            <div class="service-card p-3 border-t border-indigo-500">
+                <i class="ri-printer-line card-icon"></i>
+                <h2 class="text-xl font-bold mb-4 text-center">Print Cards</h2>
+                <p class="text-center text-gray-700 mb-4">Generate your airtime pin and start creating recharge cards and sell directly to your customers offline.</p>
+                <a href="print-card.html" class="button-primary py-2 px-4 rounded-full block text-center">Print E-Pin</a>
+            </div>
+
+            <!-- Cable TV Subscription -->
+            <div class="service-card p-3 border-t border-indigo-500">
+                <i class="ri-tv-line card-icon"></i>
+                <h2 class="text-xl font-bold mb-4 text-center">Cable TV Subscription</h2>
+                <p class="text-center text-gray-700 mb-4">Manage your cable TV subscriptions easily. Choose your preferred package and make payments in a few simple steps.</p>
+                <a href="cable-tv.html" class="button-primary py-2 px-4 rounded-full block text-center">Subscribe Now</a>
+            </div>
+
+            <!-- Electricity Bill -->
+            <div class="service-card p-3 border-t border-indigo-500">
+                <i class="ri-lightbulb-line card-icon"></i>
+                <h2 class="text-xl font-bold mb-4 text-center">Electricity Bill</h2>
+                <p class="text-center text-gray-700 mb-4">Pay your electricity bills with a few clicks. We offer a secure platform to ensure your bills are paid promptly.</p>
+                <a href="electricity.html" class="button-primary py-2 px-4 rounded-full block text-center">Pay Electricity Bill</a>
+            </div>
+            
+            <!-- ExamPin -->
+             
+            <div class="service-card p-3 border-t border-indigo-500">
+                <i class="ri-graduation-cap-line card-icon"></i>
+                <h2 class="text-xl font-bold mb-4 text-center">Exam E-Pin</h2>
+                <p class="text-center text-gray-700 mb-4">Instantly secure the pin to check your WAEC/NECO results without any hassle and efficiently.</p>
+                <a href="electricity.html" class="button-primary py-2 px-4 rounded-full block text-center">Buy Pin</a>
+            </div>
+
+            
+        </div>
+    </main>
+</body>
+
+</html>

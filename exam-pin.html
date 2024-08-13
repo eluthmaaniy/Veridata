@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamPin Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .exam-holder {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .exam-holder:hover {
+            transform: scale(1.05);
+        }
+        .exam-holder.selected {
+            border: 2px solid #4F46E5; /* Indigo-600 */
+            border-radius: 8px;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-content {
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body class="bg-auto">
+    <header class="bg-white shadow-md p-2 mb-6 flex items-center justify-between border-b border-indigo-500 rounded-full mt-2 ml-2">
+        <a href="dashboard.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <main>
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 mt-10">
+            <h1 class="text-xl font-semibold mb-4">ExamPin Generator</h1>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-semibold mb-2">Select Exam Holder</label>
+                <div id="exam-holders" class="flex space-x-4 mb-4">
+                    <div class="exam-holder p-4 border border-gray-900 rounded-lg cursor-pointer" data-id="waec">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723452659/images_2_abqxuw.jpg" alt="WAEC" class="w-24 h-24 rounded-full mx-auto">
+                        <p class="text-gray-800 text-center mt-2">WAEC</p>
+                    </div>
+                    <div class="exam-holder p-4 border border-gray-900 rounded-lg cursor-pointer" data-id="neco">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723452659/images_3_jsrzzw.jpg" alt="NECO" class="w-24 h-24 rounded-full mx-auto">
+                        <p class="text-gray-800 text-center mt-2">NECO</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="exam-details" class="hidden mb-4">
+                <label class="block text-gray-700 font-semibold mb-2">Amount</label>
+                <input type="text" id="amount" class="w-full border border-gray-900 rounded-lg p-2" readonly>
+                <p id="info" class="text-gray-600 mt-2"></p>
+
+                <label for="transaction-pin" class="block text-gray-700 font-semibold mt-4 mb-2">Transaction Pin</label>
+                <input type="password" id="transaction-pin" class="w-full border border-gray-900 rounded-lg p-2" placeholder="Enter your transaction pin">
+
+                <button id="generate-pin" class="w-full bg-indigo-500 text-white font-semibold py-2 rounded-lg mt-4">Generate Pin</button>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="success-modal" id="success-modal">
+            <div class="modal-content">
+                <i class="ri-check-double-line text-5xl text-green-500 mb-4"></i>
+                <h2 class="text-lg font-semibold mb-2">Success!</h2>
+                <p>Your PIN was successfully generated.</p>
+                <p><strong>Your PIN:</strong> <span id="generated-pin"></span></p>
+                <button id="close-modal" class="mt-4 bg-gray-500 text-white font-semibold py-2 rounded-lg">Close</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const examHolders = document.querySelectorAll('.exam-holder');
+            const examDetails = document.getElementById('exam-details');
+            const amountField = document.getElementById('amount');
+            const infoField = document.getElementById('info');
+            const generatePinBtn = document.getElementById('generate-pin');
+            const successModal = document.getElementById('success-modal');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const closeModalBtn = document.getElementById('close-modal');
+            const generatedPinField = document.getElementById('generated-pin');
+            const transactionPinField = document.getElementById('transaction-pin');
+
+            let selectedExamId = '';
+
+            examHolders.forEach(holder => {
+                holder.addEventListener('click', function () {
+                    examHolders.forEach(h => h.classList.remove('selected'));
+                    holder.classList.add('selected');
+                    selectedExamId = holder.getAttribute('data-id');
+                    updateExamDetails();
+                });
+            });
+
+            function updateExamDetails() {
+                if (selectedExamId === 'waec') {
+                    amountField.value = 'N4000';
+                    infoField.textContent = 'The fee will be deducted from your VeriData wallet.';
+                } else if (selectedExamId === 'neco') {
+                    amountField.value = 'N1500';
+                    infoField.textContent = 'The fee will be deducted from your VeriData wallet.';
+                }
+                examDetails.classList.remove('hidden');
+            }
+
+            generatePinBtn.addEventListener('click', function () {
+                const pin = generateRandomPin(15);
+                generatedPinField.textContent = pin;
+                successModal.style.display = 'block';
+                modalOverlay.style.display = 'block';
+            });
+
+            function generateRandomPin(length) {
+                let pin = '';
+                for (let i = 0; i < length; i++) {
+                    pin += Math.floor(Math.random() * 10);
+                }
+                return pin;
+            }
+
+            closeModalBtn.addEventListener('click', function () {
+                modalOverlay.style.display = 'none';
+                successModal.style.display = 'none';
+            });
+
+            modalOverlay.addEventListener('click', function () {
+                closeModalBtn.click();
+            });
+        });
+    </script>
+</body>
+
+</html>

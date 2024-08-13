@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .button-primary {
+            background-color: #4F46E5; /* Indigo-500 */
+            color: white;
+        }
+        .button-primary:hover {
+            background-color: #4338CA; /* Indigo-600 */
+        }
+        .card {
+            background: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.03);
+        }
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body class="bg-auto">
+     <header class="bg-white shadow-lg p-2 mb-6 flex items-center justify-between border-b border-indigo-500 rounded-full mt-2 ml-2">
+        <a href="dashboard.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Upgrade Account Tier</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Tier 1 -->
+            <div class="card p-3 border-t border-indigo-500">
+                <h2 class="text-xl font-bold mb-4 text-center">Tier 1</h2>
+                <i class="ri-shield-check-line text-indigo-500 text-4xl mb-4 block text-center"></i>
+                <p class="text-center text-sm mb-4">Basic access with essential features.</p>
+                <ul class="list-disc list-inside mb-4">
+                    <li>Email Verification</li>
+                </ul>
+                <button id="upgrade-tier-1" class="button-primary py-2 px-4 rounded-full w-full">Upgrade to Tier 1</button>
+            </div>
+
+            <!-- Tier 2 -->
+            <div class="card p-3 border-t border-indigo-500">
+                <h2 class="text-xl font-bold mb-4 text-center">Tier 2</h2>
+                <i class="ri-shield-check-line text-indigo-500 text-4xl mb-4 block text-center"></i>
+                <p class="text-center text-sm mb-4">Enhanced features and additional benefits.</p>
+                <ul class="list-disc list-inside mb-4">
+                    <li>Email Verification</li>
+                    <li>BVN or NIN Verification</li>
+                </ul>
+                <button id="upgrade-tier-2" class="button-primary py-2 px-4 rounded-full w-full">Upgrade to Tier 2</button>
+            </div>
+
+            <!-- Tier 3 -->
+            <div class="card p-3 border-t border-indigo-500">
+                <h2 class="text-xl font-bold mb-4 text-center">Tier 3</h2>
+                <i class="ri-shield-check-line text-indigo-500 text-4xl mb-4 block text-center"></i>
+                <p class="text-center text-sm mb-4">Premium access with all features and benefits.</p>
+                <ul class="list-disc list-inside mb-4">
+                    <li>Email Verification</li>
+                    <li>BVN or NIN Verification</li>
+                    <li>Address Verification</li>
+                </ul>
+                <button id="upgrade-tier-3" class="button-primary py-2 px-4 rounded-full w-full">Upgrade to Tier 3</button>
+            </div>
+        </div>
+
+        <!-- Modal for Verification -->
+        <div id="verification-modal" class="modal-overlay">
+            <div class="modal-content">
+                <i id="verification-icon" class="ri-check-line text-green-500 text-4xl mb-4"></i>
+                <h2 id="modal-title" class="text-xl font-semibold mb-4">Verification Required</h2>
+                <p id="modal-message" class="text-gray-700 mb-4">To complete the upgrade, please complete the following verification:</p>
+                <div id="modal-verification" class="text-left mb-4">
+                    <!-- Verification details will be populated here -->
+                </div>
+                <div class="flex justify-center gap-4 mt-4">
+                    <button id="close-modal" class="button-primary py-2 px-4 rounded-full">Close</button>
+                    <button id="proceed-to-verification" class="button-primary py-2 px-4 rounded-full">Proceed to Verification</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        const modal = document.getElementById('verification-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        const proceedButton = document.getElementById('proceed-to-verification');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalVerification = document.getElementById('modal-verification');
+        const verificationIcon = document.getElementById('verification-icon');
+
+        function openModal(title, message, verificationContent, redirectTo) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modalVerification.innerHTML = verificationContent;
+            modal.style.display = 'flex';
+            proceedButton.onclick = function () {
+                window.location.href = redirectTo;
+            };
+        }
+
+        function handleUpgrade(tier) {
+            let title, message, verificationContent, redirectTo;
+
+            switch (tier) {
+                case 'tier-1':
+                    title = 'Upgrade to Tier 1';
+                    message = 'Please verify your email address to complete the upgrade.';
+                    verificationContent = '<p><i class="ri-mail-line text-indigo-500"></i> Email Verification</p>';
+                    redirectTo = 'verify-email.html'; // Replace with your actual verification page URL
+                    break;
+                case 'tier-2':
+                    title = 'Upgrade to Tier 2';
+                    message = 'Please complete BVN or NIN verification to proceed.';
+                    verificationContent = '<p><i class="ri-user-line text-indigo-500"></i> BVN or NIN Verification</p>';
+                    redirectTo = 'verify-bvn-nin.html'; // Replace with your actual verification page URL
+                    break;
+                case 'tier-3':
+                    title = 'Upgrade to Tier 3';
+                    message = 'Complete the following verifications to upgrade to Gold Tier.';
+                    verificationContent = '<p><i class="ri-mail-line text-indigo-500"></i> Email Verification</p>' +
+                                           '<p><i class="ri-user-line text-indigo-500"></i> BVN or NIN Verification</p>' +
+                                           '<p><i class="ri-map-pin-line text-indigo-500"></i> Address Verification</p>';
+                    redirectTo = 'verify-address.html'; // Replace with your actual verification page URL
+                    break;
+                default:
+                    return;
+            }
+
+            openModal(title, message, verificationContent, redirectTo);
+        }
+
+        document.getElementById('upgrade-tier-1').addEventListener('click', function () {
+            handleUpgrade('tier-1');
+        });
+
+        document.getElementById('upgrade-tier-2').addEventListener('click', function () {
+            handleUpgrade('tier-2');
+        });
+
+        document.getElementById('upgrade-tier-3').addEventListener('click', function () {
+            handleUpgrade('tier-3');
+        });
+
+        closeModalButton.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

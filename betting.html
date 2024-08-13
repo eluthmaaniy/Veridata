@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betting Funding</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+        }
+        .company-logo {
+            width: 80px;
+            height: auto;
+        }
+        .company-option {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .company-option:hover {
+            transform: scale(1.1);
+        }
+        .company-option.selected {
+            border: 2px solid #4F46E5; /* Indigo-600 */
+            border-radius: 8px;
+        }
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-content {
+            text-align: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body class="bg-auto min-h-screen p-6">
+    <header class="bg-white shadow-md p-2 mb-6 flex items-center justify-between border-b border-indigo-500 rounded-full">
+        <a href="dashboard.html" class="text-indigo-500 flex items-center">
+            <i class="ri-arrow-left-line text-2xl"></i>
+            <span class="ml-2 font-semibold">Back</span>
+        </a>
+        <div class="flex items-center">
+            <img id="profile-pic" src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Profile Picture" class="rounded-full w-12 h-12">
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-white shadow-lg rounded-lg p-5 border-b border-t border-indigo-500">
+            <h1 class="text-xl font-semibold mb-4">Betting Funding</h1>
+            <form id="betting-form">
+                <!-- Betting Company Selection -->
+                <div class="mb-4">
+                    <label class="block text-lg font-semibold mb-2">Select Betting Company</label>
+                    <div id="betting-companies" class="flex space-x-4 overflow-x-auto">
+                        <!-- Betting company options will be added dynamically -->
+                        <div class="company-option flex flex-col items-center p-2 border border-gray-300 rounded-lg shadow-sm cursor-pointer" data-id="sportybet">
+                            <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723448184/images_scm9t4.png" alt="SportyBet" class="company-logo rounded-full h-10 w-10">
+                            <span class="mt-2 text-sm">SportyBet</span>
+                        </div>
+                        <!-- Add more betting company options similarly -->
+                        <div class="company-option flex flex-col items-center p-2 border border-gray-300 rounded-lg shadow-sm cursor-pointer" data-id="sportybet">
+                            <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723448185/images_r0cblt.jpg" alt="1xbet" class="company-logo rounded-full h-10 w-10">
+                            <span class="mt-2 text-sm">1xBet</span>
+                        </div>
+                        
+                        <div class="company-option flex flex-col items-center p-2 border border-gray-300 rounded-lg shadow-sm cursor-pointer" data-id="sportybet">
+                            <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723448185/images_1_wbcmhx.jpg" alt="BangBet" class="company-logo rounded-full h-10 w-10">
+                            <span class="mt-2 text-sm">Bangbet</span>
+                        </div>
+                        
+                       <!-- Add more -->
+                        
+                    </div>
+                </div>
+
+                <!-- Customer ID -->
+                <div class="mb-4">
+                    <label for="customer-id" class="block text-lg font-semibold mb-2">Customer ID</label>
+                    <input type="text" id="customer-id" name="customer-id" class="block w-full bg-white border border-gray-300 rounded-lg shadow-lg focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2" placeholder="Enter Customer ID" required>
+                </div>
+
+                <!-- Amount to Fund -->
+                <div class="mb-4">
+                    <label for="amount" class="block text-lg font-semibold mb-2">Amount to Fund</label>
+                    <input type="number" id="amount" name="amount" class="block w-full bg-white border border-gray-300 rounded-lg shadow-lg focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2" placeholder="Enter Amount" required>
+                </div>
+
+                <!-- Transaction Pin -->
+                <div class="mb-4">
+                    <label for="transaction-pin" class="block text-lg font-semibold mb-2">Transaction Pin</label>
+                    <input type="password" id="transaction-pin" name="transaction-pin" class="block w-full bg-white border border-gray-300 rounded-lg shadow-lg focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2" placeholder="Enter Pin" required>
+                    <a href="#" class="text-indigo-500 text-sm mt-2 block">Forgot pin? Click here to recover</a>
+                </div>
+
+                <!-- Verify Details and Pay Now Buttons -->
+                <div class="flex justify-between items-center">
+                    <button type="button" id="verify-details" class="bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">Verify Details</button>
+                    <button type="submit" id="pay-now" class="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50" disabled>Pay Now</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Success Modal -->
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="success-modal" id="success-modal">
+            <div class="modal-content">
+                <i class="ri-check-double-line text-5xl text-green-500 mb-4"></i>
+                <h2 class="text-lg font-semibold mb-2">Success!</h2>
+                <p>Your funding was successful.</p>
+                <p><strong>Company:</strong> <span id="success-company"></span></p>
+                <p><strong>Customer ID:</strong> <span id="success-customer-id"></span></p>
+                <p><strong>Amount:</strong> ₦<span id="success-amount"></span></p>
+                <button id="close-modal" class="mt-4 bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">Close</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const companies = document.querySelectorAll('.company-option');
+            const verifyBtn = document.getElementById('verify-details');
+            const payNowBtn = document.getElementById('pay-now');
+            const successModal = document.getElementById('success-modal');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const closeModalBtn = document.getElementById('close-modal');
+            let isVerified = false;
+
+            companies.forEach(company => {
+                company.addEventListener('click', function () {
+                    companies.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            verifyBtn.addEventListener('click', function () {
+                const selectedCompany = document.querySelector('.company-option.selected');
+                if (selectedCompany) {
+                    // Simulate verification
+                    isVerified = true;
+                    payNowBtn.disabled = !isVerified;
+                } else {
+                    alert('Please select a betting company.');
+                }
+            });
+
+            document.getElementById('betting-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                if (isVerified) {
+                    document.getElementById('success-company').textContent = document.querySelector('.company-option.selected span').textContent;
+                    document.getElementById('success-customer-id').textContent = document.getElementById('customer-id').value;
+                    document.getElementById('success-amount').textContent = document.getElementById('amount').value;
+                    modalOverlay.style.display = 'block';
+                    successModal.style.display = 'block';
+                } else {
+                    alert('Please verify your details before proceeding.');
+                }
+            });
+
+            closeModalBtn.addEventListener('click', function () {
+                modalOverlay.style.display = 'none';
+                successModal.style.display = 'none';
+            });
+
+            modalOverlay.addEventListener('click', function () {
+                closeModalBtn.click();
+            });
+        });
+    </script>
+</body>
+
+</html>

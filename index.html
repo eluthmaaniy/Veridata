@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeriData</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
+    <link href='https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap' rel='stylesheet'/>
+        <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/index.css">
+   
+    <style>
+      
+      body {
+        font-family: Jost, sans-serif;
+      }     
+    </style>
+</head>
+<body class="bg-white text-auto overflow-x: hidden;">
+    <!-- Header -->
+    <header class="flex items-center justify-between p-2 bg-white text- shadow-lg rounded-full ml-1 mt-1 mr-1 border-b border-indigo-500">
+        <div class="flex items-center">
+           <h1 class="text-xl font-semibold" id="logo">
+<span class="text-gray-800 ml-2">VERI</span>
+<span class="text-indigo-500">DATA</span>
+</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="supportBtn" class="text-indigo-500 hover:text-indigo-500"><i class="ri-customer-service-2-line ri-2x"></i></button>
+            <button id="darkModeToggle" class="text-gray-800 hover:text-indigo-500">
+                <i class="ri-moon-line ri-2x hidden text-gray-800" id="darkIcon"></i>
+                <i class="ri-sun-line ri-2x text-gray-800" id="lightIcon"></i>
+            </button>
+            <button class="md:hidden text-indigo-500" onclick="toggleMenu()" id="menuToggle">
+                <i class="ri-apps-fill ri-2x"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navbar -->
+    <nav class="hidden md:flex items-center justify-between px-6 py-4 bg-gray-800 text-white">
+        <div class="flex space-x-4">
+            <a href="#" class="hover:text-indigo-500">Data</a>
+            <a href="sign-up.html" class="hover:text-indigo-500">Airtime</a>
+            <a href="sign-up.html" class="hover:text-indigo-500">Exam Pin</a>
+            <a href="sign-up.html" class="hover:text-indigo-500">Pay Bills</a>
+            <a href="#" class="hover:text-indigo-500">Blog</a>
+        </div>
+        <div class="flex space-x-4">
+           <button class="text-indigo-500 border border-indigo-500 py-2 px-6 rounded-full hover:bg-indigo-500 hover:text-white" id="navbarLoginBtn"><a href="sign-in.html">Login</a></button>
+<button class="text-white bg-indigo-500 py-2 px-6 rounded-full hover:bg-indigo-600" id="navbarRegisterBtn"><a href="sign-up.html">Register</a></button>
+        </div>
+    </nav>
+
+    <!-- Menu Overlay (for mobile) -->
+    <div id="menuOverlay" class="flex">
+        <button class="absolute top-6 right-6 text-white" onclick="toggleMenu()">
+            <i class="ri-close-line ri-3x"></i>
+        </button>
+        <div class="flex flex-col items-center">
+            <a href="sign-up.html" class="menuItem">Data</a>
+            <a href="sign-up.html" class="menuItem">Airtime</a>
+            <a href="sign-up.html" class="menuItem">Exam Pin</a>
+            <a href="support.html" class="menuItem">Pay Bills</a>
+            <a href="#" class="menuItem">Blog</a>
+            <button class="text-indigo-500 border border-indigo-500 py-2 px-4 rounded-full hover:bg-indigo-500 hover:text-white mt-8" id="overlayLoginBtn"><a href="sign-in.html">Login</a></button>
+<button class="text-white bg-indigo-500 py-2 px-4 rounded-full hover:bg-indigo-600 mt-4" id="overlayRegisterBtn"><a href="sign-up.html">Register</a></button>
+            <!-- Dark Mode Toggle for Mobile -->
+            <div class="flex items-center mt-8">
+                <button id="overlayDarkModeToggle" class="text-white hover:text-indigo-500">
+                    <i class="ri-moon-line ri-2x hidden" id="overlayDarkIcon"></i>
+                    <i class="ri-sun-line ri-2x" id="overlayLightIcon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="flex flex-col md:flex-row items-center px-6 md:px-20 py-10 md:py-32" data-aos="flip-left" data-aos-duration="2000">
+        <div class="md:w-1/2">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 text-auto">Stay Connected.</h2>
+            <p class="text-lg md:text-xl mb-6 text-auto">Instant, Reliable, and Affordable VTU Services</p>
+            <blockquote class="text-lg md:text-xl mb-6 text-gray-500 italic">"VeriData Brings Connectivity!</blockquote>
+            <div class="space-x-4 mb-6">
+                <button class="text-white bg-indigo-500 py-2 px-5 rounded-full" id="heroExploreBtn"><a href="sign-up.html">Get Started</a></button>
+<button class="text-indigo-500 border border-indigo-500 py-2 px-6 rounded-full hover:bg-indigo-500 hover:text-white" id="heroRegisterBtn"><a href="#">Services</a></button>
+                
+            </div>
+            <div class="mt-6">
+                <p class="text-lg md:text-xl mb-2 text-auto">Trusted by:</p>
+                <div class="logo-carousel">
+                    <div class="logo-carousel-inner">
+                        <!-- Add more logos as needed -->
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1716486012/images_1_hdna5c.jpg" alt="Glo Logo" class="w-10 h-10 rounded-full">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723396506/Airtel_logo-01_ns3tlx.png" alt="Airtel Logo" class="w-10 h-10 rounded-full">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723396506/images_ntqbqp.png" alt="MTN Logo" class="w-10 h-10 rounded-full">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723396507/images_dvzpyw.jpg" alt="9mobile Logo" class="w-10 h-10 rounded-full">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1716487214/download_4_dezecw.jpg" alt="Payment Partner Logo" class="w-10 h-10 rounded-full">
+                        <!-- Repeat logos to ensure a smooth sliding effect -->
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723397076/images_2_tkbsmw.jpg" alt="Startime Logo" class="w-10 h-10 rounded-full">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1716487215/images_2_lxuqtu.jpg" alt="GoTv Logo" class="w-10 h-10 rounded-full">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723396967/images_1_wvriil.jpg" alt="IBEDC Logo" class="w-10 h-10 rounded-full">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1716485424/images_dfnzvj.jpg" alt="Moniepoint Logo" class="w-10 h-10 rounded-full">
+                        <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723397367/images_3_x0jblk.jpg" alt="Payment Partner Logo" class="w-10 h-10 rounded-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/2 mt-10 md:mt-0">
+            <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723297955/img18_pda6sn.png" alt="Person holding a phone with a smiling expression" class="w-auto h-auto rounded-lg" id="heroImage">
+        </div>
+    </section>
+    
+<!-- Features Section -->
+<section class="px-6 md:px-20 py-8 md:py-20 bg-indigo-50" data-aos="fade-up" data-aos-duration="2000">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800">Our Key Features</h2>
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+        <!-- Feature 1 -->
+        <div class="bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl border-b border-t border-indigo-500" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="flex items-center mb-4">
+                <i class="ri-smartphone-fill text-4xl text-indigo-500 mr-2"></i>
+                <h3 class="text-xl font-semibold text-gray-800">Airtime</h3>
+            </div>
+            <p class="text-gray-600 mb-4">Top-up your phone instantly with no delays or hassles.</p>
+           
+        </div>
+        <!-- Feature 2 -->
+        <div class="bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl border-b border-t border-indigo-500" data-aos="zoom-out" data-aos-duration="1000">
+            <div class="flex items-center mb-4">
+                <i class="ri-router-fill text-4xl text-indigo-500 mr-2"></i>
+                <h3 class="text-xl font-semibold text-gray-800">Data</h3>
+            </div>
+            <p class="text-gray-600 mb-4">Choose and activate data bundles instantly.</p>
+           
+        </div>
+        <!-- Feature 3 -->
+        <div class="bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl border-b border-t border-indigo-500" data-aos="fade-down" data-aos-duration="1000">
+            <div class="flex items-center mb-4">
+                <i class="ri-bill-fill text-4xl text-indigo-500 mr-2"></i>
+                <h3 class="text-xl font-semibold text-gray-800">Bill</h3>
+            </div>
+            <p class="text-gray-600 mb-4">Pay all your bills easily and securely.</p>
+           
+        </div>
+        <!-- Feature 4 -->
+        <div class="bg-white p-2 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-xl border-b border-t border-indigo-500" data-aos="fade-up" data-aos-duration="1000">
+            <div class="flex items-center mb-4">
+                <i class="ri-lock-fill text-4xl text-indigo-500 mr-2"></i>
+                <h3 class="text-xl font-semibold text-gray-800">Secured</h3>
+            </div>
+            <p class="text-gray-600 mb-4">Your transactions are safeguarded with advanced security.</p>
+            
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Services Section -->
+<section id="servicesSection" class="px-6 md:px-20 py-10 md:py-32 bg-auto overflow-hidden" data-aos="fade-up" data-aos-duration="2000">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-auto">Our Services</h2>
+    <div class="flex flex-col md:flex-row items-center w-full">
+        <!-- Image/Illustration Side -->
+        <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right" data-aos-duration="2000">
+            <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1723480052/datagirl_o5pisc.png" alt="Services Illustration" class="w-full max-w-full h-auto rounded-lg">
+        </div>
+        <!-- Services Tabs Side -->
+        <div class="md:w-1/2" data-aos="fade-left" data-aos-duration="2000">
+            <div class="space-y-8 w-full">
+                <!-- Tab 1: Airtime Top-Up -->
+                <div id="tabAirtime" class="p-3 rounded-lg bg-auto shadow-lg hover:bg-indigo-500 hover:text-white transition-colors border border-indigo-100">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="ri-phone-line text-4xl text-indigo-800 mr-4"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold">Airtime Top-Up</h3>
+                            </div>
+                        </div>
+                        <a href="#airtimePage" class="bg-indigo-700 text-white py-2 px-4 rounded-full hover:bg-indigo-600 transition-colors ml-2">Explore</a>
+                    </div>
+                </div>
+                <!-- Tab 2: Data Bundles -->
+                <div id="tabData" class="p-3 rounded-lg bg-auto shadow-lg hover:bg-indigo-500 hover:text-white transition-colors border border-indigo-100">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="ri-router-line text-4xl text-indigo-800 mr-4"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold">Data Bundles</h3>
+                            </div>
+                        </div>
+                        <a href="#dataPage" class="bg-indigo-700 text-white py-2 px-4 rounded-full hover:bg-indigo-600 transition-colors">Explore</a>
+                    </div>
+                </div>
+                <!-- Tab 3: CableTV.. -->
+                <div id="tabCableTV" class="p-3 rounded-lg bg-auto shadow-lg hover:bg-indigo-500 hover:text-white transition-colors border border-indigo-100">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="ri-tv-line text-4xl text-indigo-800 mr-4"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold">Cable TV</h3>
+                            </div>
+                        </div>
+                        <a href="#cableTVPage" class="bg-indigo-700 text-white py-2 px-4 rounded-full hover:bg-indigo-600 transition-colors">Explore</a>
+                    </div>
+                </div>
+                
+                 <!-- Tab 4: Electricity.. -->
+                <div id="tabElectricity" class="p-3 rounded-lg bg-auto shadow-lg hover:bg-indigo-500 hover:text-white transition-colors border border-indigo-100">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="ri-flashlight-line text-4xl text-indigo-800 mr-4"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold">Electricity Pay</h3>
+                            </div>
+                        </div>
+                        <a href="#electricityPage" class="bg-indigo-700 text-white py-2 px-4 rounded-full hover:bg-indigo-600 transition-colors">Explore</a>
+                    </div>
+                </div>
+                
+                 <!-- Tab 5: ExamFee.. -->
+                <div id="tabExamFees" class="p-3 rounded-lg bg-auto shadow-lg hover:bg-indigo-500 hover:text-white transition-colors border border-indigo-100">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <i class="ri-book-line text-4xl text-indigo-800 mr-4"></i>
+                            <div>
+                                <h3 class="text-xl font-semibold">Exam Reg Pay</h3>
+                            </div>
+                        </div>
+                        <a href="#examFeesPage" class="bg-indigo-700 text-white py-2 px-4 rounded-full hover:bg-indigo-600 transition-colors">Explore</a>
+                    </div>
+                </div>
+                <!-- Additional services if needed -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- How It Works Section -->
+<section id="howItWorksSection" class="px-6 md:px-20 py-10 md:py-32 bg-gray-50" data-aos="fade-up" data-aos-duration="2000">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800">How It Works</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Step 1: Register -->
+        <div class="flex flex-col items-center text-center" data-aos="fade-up" data-aos-duration="2000">
+            <div class="bg-indigo-500 text-white rounded-full p-6 mb-6">
+                <i class="ri-user-add-line text-5xl"></i>
+            </div>
+            <h4 class="text-2xl font-semibold mb-4 text-gray-800">Register</h4>
+            <p class="text-gray-600">Sign up with your details and create an account in a few easy steps.</p>
+        </div>
+        <!-- Step 2: Fund Wallet -->
+        <div class="flex flex-col items-center text-center" data-aos="fade-up" data-aos-duration="2000">
+            <div class="bg-indigo-500 text-white rounded-full p-6 mb-6">
+                <i class="ri-wallet-line text-5xl"></i>
+            </div>
+            <h4 class="text-2xl font-semibold mb-4 text-gray-800">Fund Wallet</h4>
+            <p class="text-gray-600">Top up your wallet using various payment methods available.</p>
+        </div>
+        <!-- Step 3: Make Purchases -->
+        <div class="flex flex-col items-center text-center" data-aos="fade-up" data-aos-duration="2000">
+            <div class="bg-indigo-500 text-white rounded-full p-6 mb-6">
+                <i class="ri-shopping-bag-line text-5xl"></i>
+            </div>
+            <h4 class="text-2xl font-semibold mb-4 text-gray-800">Make Purchases</h4>
+            <p class="text-gray-600">Buy airtime, data bundles, and pay bills directly from your wallet.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Testimonials Section -->
+<section id="testimonialsSection" class="px-6 md:px-20 py-10 md:py-32 bg-auto" data-aos="fade-up" data-aos-duration="2000">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 text-auto">What Our Customers Say</h2>
+    
+    <!-- Testimonial Slider -->
+    <div class="testimonial-slider relative" data-aos="fade-up" data-aos-duration="2000">
+      
+        <!-- Testimonial 1 -->
+        <div class="testimonial-item text-center p-6 bg-white rounded-lg shadow-lg mx-4 border-b border-t border-indigo-500" id="testimonial1">
+            <i class="ri-discuss-line text-4xl text-indigo-700 mb-4"></i>
+            <p class="text-lg md:text-xl italic text-gray-600 mb-4">"This VTU service is absolutely amazing! It’s fast, reliable, and affordable. Highly recommended!"</p>
+            <div class="flex items-center justify-center">
+                <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721301156/images_5_ngtz0v.jpg" alt="Customer Image" class="w-16 h-16 rounded-full mr-4">
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800">John Doe</h4>
+                    <p class="text-gray-500">Entrepreneur</p>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="testimonial-item text-center p-6 bg-white rounded-lg shadow-lg mx-4 border-b border-t border-indigo-500" id="testimonial2">
+            <i class="ri-discuss-line text-4xl text-indigo-700 mb-4"></i>
+            <p class="text-lg md:text-xl italic text-gray-600 mb-4">"I love the ease of use and the quick transactions. The customer service is also top-notch!"</p>
+            <div class="flex items-center justify-center">
+                <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_3_prqpng.jpg" alt="Customer Image" class="w-16 h-16 rounded-full mr-4">
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800">Jane Smith</h4>
+                    <p class="text-gray-500">Freelancer</p>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="testimonial-item text-center p-6 bg-white rounded-lg shadow-lg mx-4 border-b border-t border-indigo-500" id="testimonial3">
+            <i class="ri-discuss-line text-4xl text-indigo-700 mb-4"></i>
+            <p class="text-lg md:text-xl italic text-gray-600 mb-4">"Affordable rates and a user-friendly interface make this VTU service the best I’ve tried."</p>
+            <div class="flex items-center justify-center">
+                <img src="https://res.cloudinary.com/dib5bkbsy/image/upload/v1721300995/images_wx9nhd.jpg" alt="Customer Image" class="w-16 h-16 rounded-full mr-4">
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-800">Michael Johnson</h4>
+                    <p class="text-gray-500">Software Developer</p>
+                </div>
+            </div>
+        </div>
+        <!-- Add more testimonials as needed -->
+    </div>
+</section>
+
+
+<!-- FAQ Section -->
+<section id="faqSection" class="px-6 md:px-20 py-10 md:py-32 bg-auto" data-aos="flip-right" data-aos-duration="2000">
+    <h5 class="text-4xl md:text-5xl font-bold text-center mb-12 text-auto">Frequently Asked Questions</h5>
+    <div class="space-y-6">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item bg-white rounded-lg shadow-lg p-6 border-b border-indigo-500" data-aos="fade-up" data-aos-duration="2000">
+            <div class="flex items-center justify-between cursor-pointer" id="faq1Question">
+                <h5 class="text-xl font-semibold text-gray-900">How can I register for the service?</h5>
+                <i class="ri-arrow-down-s-line text-2xl text-indigo-500" id="faq1Toggle"></i>
+            </div>
+            <p class="text-gray-600 mt-4 hidden" id="faq1Answer">To register, simply click the "Sign Up" button on our homepage, fill in your details, and follow the instructions to complete your registration.</p>
+        </div>
+        <!-- FAQ Item 2 -->
+        <div class="faq-item bg-white rounded-lg shadow-lg p-6 border-b border-indigo-500" data-aos="fade-up" data-aos-duration="2000">
+            <div class="flex items-center justify-between cursor-pointer" id="faq2Question">
+                <h5 class="text-xl font-semibold text-gray-800">What payment options are available?</h5>
+                <i class="ri-arrow-down-s-line text-2xl text-indigo-500" id="faq2Toggle"></i>
+            </div>
+            <p class="text-gray-600 mt-4 hidden" id="faq2Answer">We support various payment methods including credit/debit cards, bank transfers, and mobile money. You can select your preferred option during the wallet funding process.</p>
+        </div>
+        <!-- FAQ Item 3 -->
+        <div class="faq-item bg-white rounded-lg shadow-lg p-6 border-b border-indigo-500" data-aos="fade-up" data-aos-duration="2000">
+            <div class="flex items-center justify-between cursor-pointer" id="faq3Question">
+                <h5 class="text-xl font-semibold text-gray-800">Is my payment information secure?</h5>
+                <i class="ri-arrow-down-s-line text-2xl text-indigo-500" id="faq3Toggle"></i>
+            </div>
+            <p class="text-gray-600 mt-4 hidden" id="faq3Answer">Yes, we use industry-standard encryption protocols to ensure that your payment information is securely processed and stored.</p>
+        </div>
+        <!-- FAQ Item 4 -->
+        <div class="faq-item bg-white rounded-lg shadow-lg p-6 border-b border-indigo-500" data-aos="fade-up" data-aos-duration="2000">
+            <div class="flex items-center justify-between cursor-pointer" id="faq4Question">
+                <h5 class="text-xl font-semibold text-gray-800">Can I get a refund if there's an issue?</h5>
+                <i class="ri-arrow-down-s-line text-2xl text-indigo-500" id="faq4Toggle"></i>
+            </div>
+            <p class="text-gray-600 mt-4 hidden" id="faq4Answer">Yes, we have a refund policy in place. If you encounter any issues, please contact our support team, and we will assist you with the refund process.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Call-to-Action Section -->
+<section id="ctaSection" class="px-6 md:px-20 py-5 md:py-22 bg-indigo-500 text-white" data-aos="fade-up" data-aos-duration="2000">
+    <div class="flex flex-col md:flex-row items-center justify-between">
+        <!-- CTA Text and Buttons -->
+        <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right" data-aos-duration="2000">
+            <h5 class="text-3xl md:text-4xl font-bold mb-6">Get Started with Our App</h5>
+            <p class="text-lg mb-6">Download our app from the Play Store or Apple Store and start enjoying seamless VTU services.</p>
+            <div class="flex space-x-4 mb-6">
+                <a href="#" class="flex items-center text-white bg-gray-800 py-2 px-4 rounded-full hover:bg-gray-700 transition-colors" id="ctaPlayStoreBtn">
+                    <i class="ri-google-play-line text-2xl mr-2"></i>
+                    <span>Available on Play Store</span>
+                </a>
+                <a href="#" class="flex items-center text-white bg-gray-800 py-2 px-4 rounded-full hover:bg-gray-700 transition-colors" id="ctaAppStoreBtn">
+                    <i class="ri-apple-line text-2xl mr-2"></i>
+                    <span>Available on App Store</span>
+                </a>
+            </div>
+            </div>
+        
+    </div>
+</section>
+
+
+<footer class="bg-gray-900 text-white py-8 mt-2">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center space-x-2">
+               <i class="ri-bill-fill text-white text-3xl"></i>
+                <span class="text-xl font-semibold">VeriData</span>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-gray-400">
+                    <i class="ri-facebook-fill text-2xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-gray-400">
+                    <i class="ri-twitter-fill text-2xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-gray-400">
+                    <i class="ri-instagram-fill text-2xl"></i>
+                </a>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-sm">
+            <div>
+                <h5 class="font-semibold">Features</h5>
+                <ul>
+                    <li><a href="#" class="text-white hover:underline">Pay Bills</a></li>
+                    <li><a href="#" class="text-white hover:underline">Theme Switch</a></li>
+                    <li><a href="#" class="text-white hover:underline">Modern UI</a></li>
+                    <li><a href="#" class="text-white hover:underline">Referral</a></li>
+                   
+                    <li><a href="#" class="text-white hover:underline">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold">Download</h5>
+                <ul>
+                    <li><a href="#" class="text-white hover:underline">Windows</a></li>
+                    <li><a href="#" class="text-white hover:underline">Mac</a></li>
+                    <li><a href="#" class="text-white hover:underline">iPhone</a></li>
+                    <li><a href="#" class="text-white hover:underline">Apps</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold">Links</h5>
+                <ul>
+                    <li><a href="#" class="text-white hover:underline">Help Center</a></li>
+                    <li><a href="/" class="text-white hover:underline">Terms of Use</a></li>
+                    <li><a href="#" class="text-white hover:underline">Privacy Policy</a></li>
+                    <li><a href="#" class="text-white hover:underline">DPA (GDPR)</a></li>
+                    <li><a href="#" class="text-white hover:underline">Security</a></li>
+                    <li><a href="#" class="text-white hover:underline">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-semibold">Support</h5>
+                <ul>
+                    <li><a href="#" class="text-white hover:underline">Help Center</a></li>
+                    <li><a href="/" class="text-white hover:underline">Terms of Use</a></li>
+                    <li><a href="#" class="text-white hover:underline">Privacy Policy</a></li>
+                    <li><a href="#" class="text-white hover:underline">Ticket</a></li>
+                    <li><a href="#" class="text-white hover:underline">Security</a></li>
+                    <li><a href="#" class="text-white hover:underline">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Newsletter Box -->
+        <div class="flex items-center mt-8">
+            <div class="bg-gray-800 text-gray-100 py-2 px-4 rounded-l-md flex items-center">
+                <input type="email" placeholder="Your email" class="bg-transparent text-gray-100 focus:outline-none placeholder-gray-300">
+            </div>
+            <i class="ri-mail-fill text-2xl ml-4"></i>
+        </div>
+    </div>
+    </footer>
+    
+    <div class="py-2 text-center bg-gray-800 text-white" id="socket">
+        <div class="container mx-auto px-2">
+            <p class="credit-content mx-auto my-0 p-2 border-2 border-white rounded-lg inline-block">
+                ©️ <span id="getYear">2024</span> VeriData
+                <svg class="inline-block ml-1 w-4 h-5" viewBox="0 0 24 24">
+                    <path d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" fill="#ffffff"/>
+                </svg>
+                | All Rights Reserved
+            </p>
+        </div>
+    </div>
+
+	
+
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/index.js"></script>
+        <script>
+        // Initialize AOS
+        AOS.init();
+        
+    </script>
+</body>
+</html>
