@@ -14,7 +14,53 @@
       
       body {
         font-family: Jost, sans-serif;
-      }     
+      }   
+      /* Custom Style for the menu overlay */
+        #menuOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 50;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #menuOverlay a {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        #menuOverlay a:hover {
+            color: #6366F1; /* Tailwind's indigo-500 */
+        }
+        
+
+
+ /* Keyframes for sliding animation */
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .logo-carousel {
+            display: flex;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        .logo-carousel-inner {
+            display: flex;
+            animation: slide 20s linear infinite;
+        }
+        
+        .logo-carousel img {
+            margin-right: 16px;
+        }        
+	    
     </style>
 </head>
 <body class="bg-white text-auto overflow-x: hidden;">
